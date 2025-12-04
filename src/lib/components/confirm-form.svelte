@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import {
@@ -19,11 +20,11 @@
 			<Card.Description>Введите 6-значный код, отправленный на ваш email</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<form>
+			<form method="POST" use:enhance action="/auth?/confirm">
 				<FieldGroup>
 					<Field>
 						<FieldLabel for="code-{id}">Код</FieldLabel>
-						<InputOTP.Root maxlength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
+						<InputOTP.Root name="code" maxlength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
 							{#snippet children({ cells })}
 								<InputOTP.Group>
 									{#each cells as cell (cell)}

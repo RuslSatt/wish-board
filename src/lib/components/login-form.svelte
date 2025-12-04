@@ -20,7 +20,7 @@
 			<Card.Description>Введите ваш email для входа</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<form method="POST" use:enhance>
+			<form method="POST" use:enhance action="/auth?/login">
 				<FieldGroup>
 					<Field>
 						<FieldLabel for="email-{id}">Email</FieldLabel>
