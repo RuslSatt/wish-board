@@ -8,21 +8,23 @@
 		FieldDescription
 	} from '$lib/components/ui/field/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
+	import { enhance } from '$app/forms';
+
 	const id = $props.id();
 </script>
 
 <div class="flex flex-col gap-6">
 	<Card.Root>
 		<Card.Header class="text-center">
-			<Card.Title class="text-xl">Добро пожаловать обратно!</Card.Title>
-			<Card.Description>Login with your email</Card.Description>
+			<Card.Title class="text-xl">Добро пожаловать!</Card.Title>
+			<Card.Description>Введите ваш email для входа</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<form>
+			<form method="POST" use:enhance>
 				<FieldGroup>
 					<Field>
 						<FieldLabel for="email-{id}">Email</FieldLabel>
-						<Input id="email-{id}" type="email" placeholder="m@example.com" required />
+						<Input id="email-{id}" type="email" name="email" placeholder="m@example.com" required />
 					</Field>
 					<Field>
 						<Button type="submit">Войти</Button>
