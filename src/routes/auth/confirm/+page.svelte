@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ConfirmForm from '$lib/components/confirm-form.svelte';
+	import { ConfirmForm } from '$lib/features/auth';
 </script>
 
 <ConfirmForm />
