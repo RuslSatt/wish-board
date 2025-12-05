@@ -10,8 +10,8 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<main class="flex flex-col min-h-svh">
-	<div class="flex-1">
+<main class="flex flex-col h-svh overflow-hidden">
+	<div class="flex-1 overflow-y-auto">
 		{@render children()}
 	</div>
 	<Navbar />

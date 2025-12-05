@@ -13,6 +13,7 @@ declare global {
 		// interface Error {}
 		interface PageData {
 			user: User | null;
+			supabase?: SupabaseClient<Database>;
 		}
 		// interface PageState {}
 		// interface Platform {}
