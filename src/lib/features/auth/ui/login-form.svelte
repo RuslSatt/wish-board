@@ -9,8 +9,27 @@
 	} from '$lib/components/ui/field/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { enhance } from '$app/forms';
+	import type { ActionData } from '../../../../routes/auth/$types';
+	import Loader2Icon from '@lucide/svelte/icons/loader-2';
 
 	const id = $props.id();
+
+	type LoginFormProps = {
+		form: ActionData;
+	};
+
+	const { form }: LoginFormProps = $props();
+
+	let isLoading = $state(false);
+
+	const handleEnhance: Parameters<typeof enhance>[1] = () => {
+		isLoading = true;
+
+		return async ({ update }) => {
+			await update?.();
+			isLoading = false;
+		};
+	};
 </script>
 
 <div class="flex flex-col gap-6">
@@ -20,14 +39,19 @@
 			<Card.Description>Введите ваш email для входа</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<form method="POST" use:enhance action="/auth?/login">
+			<form method="POST" use:enhance={handleEnhance} action="/auth?/login">
 				<FieldGroup>
 					<Field>
 						<FieldLabel for="email-{id}">Email</FieldLabel>
 						<Input id="email-{id}" type="email" name="email" placeholder="m@example.com" required />
 					</Field>
 					<Field>
-						<Button type="submit">Войти</Button>
+						<Button type="submit" disabled={isLoading}>
+							Войти
+							{#if isLoading}
+								<Loader2Icon class="animate-spin" />
+							{/if}
+						</Button>
 					</Field>
 				</FieldGroup>
 			</form>
