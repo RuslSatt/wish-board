@@ -9,16 +9,17 @@
 	} from '$lib/components/ui/field/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { enhance } from '$app/forms';
-	import type { ActionData } from '../../../../routes/auth/$types';
+	import type { ActionData } from '../../../../routes/auth/login/$types';
 	import Loader2Icon from '@lucide/svelte/icons/loader-2';
 
-	const id = $props.id();
-
 	type LoginFormProps = {
-		form: ActionData;
+		form?: ActionData;
+		id?: string;
 	};
 
-	const { form }: LoginFormProps = $props();
+	let { form }: LoginFormProps = $props();
+
+	const id = $props.id();
 
 	let isLoading = $state(false);
 
@@ -39,7 +40,7 @@
 			<Card.Description>Введите ваш email для входа</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<form method="POST" use:enhance={handleEnhance} action="/auth?/login">
+			<form method="POST" use:enhance={handleEnhance} action="?/login">
 				<FieldGroup>
 					<Field>
 						<FieldLabel for="email-{id}">Email</FieldLabel>

@@ -20,7 +20,7 @@
 			<Card.Description>Введите 6-значный код, отправленный на ваш email</Card.Description>
 		</Card.Header>
 		<Card.Content>
-			<form method="POST" use:enhance action="/auth?/confirm">
+			<form method="POST" use:enhance action="?/confirm">
 				<FieldGroup>
 					<Field>
 						<FieldLabel for="code-{id}">Код</FieldLabel>
