@@ -16,7 +16,7 @@ export const actions: Actions = {
 		const email = cookies.get(PENDING_EMAIL_COOKIE);
 
 		if (!email) {
-			return fail(400, { error: 'Email not found. Please try logging in again.', code });
+			return fail(400, { error: 'Email not found. Please try logging in again.', missing: true });
 		}
 
 		const { error } = await locals.supabase.auth.verifyOtp({
@@ -26,7 +26,7 @@ export const actions: Actions = {
 		});
 
 		if (error) {
-			return fail(400, { error: error.message, code });
+			return fail(400, { error: error.message, incorrect: true });
 		}
 
 		cookies.delete(PENDING_EMAIL_COOKIE, { path: '/' });

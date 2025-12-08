@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import {
 		FieldGroup,
@@ -10,8 +9,8 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { enhance } from '$app/forms';
 	import type { ActionData } from '../../../../routes/auth/login/$types';
-	import Loader2Icon from '@lucide/svelte/icons/loader-2';
 	import AlertError from './alert-error.svelte';
+	import ButtonForm from './button-form.svelte';
 
 	type LoginFormProps = {
 		form?: ActionData;
@@ -54,12 +53,7 @@
 						{/if}
 					</Field>
 					<Field>
-						<Button type="submit" disabled={isLoading}>
-							Войти
-							{#if isLoading}
-								<Loader2Icon class="animate-spin" />
-							{/if}
-						</Button>
+						<ButtonForm {isLoading} label="Войти" />
 					</Field>
 				</FieldGroup>
 			</form>
