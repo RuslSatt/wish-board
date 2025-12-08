@@ -6,7 +6,7 @@
 	import { HeaderIcon } from '..';
 
 	type HeaderProps = {
-		children: Snippet;
+		children?: Snippet;
 		className?: string;
 		title?: string;
 		ariaLabel?: string;
@@ -33,5 +33,5 @@
 		</Button>
 	{/if}
 	<h1 class="text-2xl font-bold">{title}</h1>
-	{@render children()}
+	{@render children?.()}
 </div>

@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="flex items-center justify-center gap-2 w-full px-4 mt-2">
-		<Button href="/profile/edit" variant="outline" size="sm" class="flex-1 flex justify-center"
+		<Button href="/edit-profile" variant="outline" size="sm" class="flex-1 flex justify-center"
 			>Редактировать профиль</Button
 		>
 		<Button variant="outline" size="sm" class="flex-1 flex justify-center">Поделиться</Button>
