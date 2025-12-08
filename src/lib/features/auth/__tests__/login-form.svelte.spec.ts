@@ -32,4 +32,20 @@ describe('LoginForm', () => {
 
 		await expect.element(submitButton).toBeDisabled();
 	});
+
+	it('should show incorrect error', async () => {
+		render(LoginForm, { form: { incorrect: true, error: 'Incorrect email' } });
+
+		const incorrectError = page.getByTestId('incorrect-error');
+		await expect.element(incorrectError).toBeVisible();
+		expect(incorrectError).toHaveTextContent('Incorrect email');
+	});
+
+	it('should show missing error', async () => {
+		render(LoginForm, { form: { missing: true, error: 'Missing email' } });
+
+		const missingError = page.getByTestId('missing-error');
+		await expect.element(missingError).toBeVisible();
+		expect(missingError).toHaveTextContent('Missing email');
+	});
 });

@@ -11,6 +11,7 @@
 	import { enhance } from '$app/forms';
 	import type { ActionData } from '../../../../routes/auth/login/$types';
 	import Loader2Icon from '@lucide/svelte/icons/loader-2';
+	import AlertError from './alert-error.svelte';
 
 	type LoginFormProps = {
 		form?: ActionData;
@@ -41,10 +42,16 @@
 		</Card.Header>
 		<Card.Content>
 			<form method="POST" use:enhance={handleEnhance} action="?/login">
+				{#if form?.incorrect}
+					<AlertError error={form.error} data-testid="incorrect-error" />
+				{/if}
 				<FieldGroup>
 					<Field>
 						<FieldLabel for="email-{id}">Email</FieldLabel>
 						<Input id="email-{id}" type="email" name="email" placeholder="m@example.com" required />
+						{#if form?.missing}
+							<AlertError error={form.error} data-testid="missing-error" />
+						{/if}
 					</Field>
 					<Field>
 						<Button type="submit" disabled={isLoading}>
