@@ -11,7 +11,8 @@
 	import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'bits-ui';
 	import type { ActionData } from '../../../../routes/auth/confirm/$types';
 	import AlertError from './alert-error.svelte';
-	import ButtonForm from './button-form.svelte';
+	import { Button } from '$lib/components/ui/button';
+
 	const id = $props.id();
 
 	type ConfirmFormProps = {
@@ -57,7 +58,7 @@
 						{/if}
 					</Field>
 					<Field>
-						<ButtonForm {isLoading} label="Подтвердить" />
+						<Button loading={isLoading} disabled={isLoading}>Подтвердить</Button>
 					</Field>
 				</FieldGroup>
 			</form>

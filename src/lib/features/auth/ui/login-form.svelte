@@ -10,7 +10,7 @@
 	import { enhance } from '$app/forms';
 	import type { ActionData } from '../../../../routes/auth/login/$types';
 	import AlertError from './alert-error.svelte';
-	import ButtonForm from './button-form.svelte';
+	import { Button } from '$lib/components/ui/button';
 
 	type LoginFormProps = {
 		form?: ActionData;
@@ -53,7 +53,7 @@
 						{/if}
 					</Field>
 					<Field>
-						<ButtonForm {isLoading} label="Войти" />
+						<Button loading={isLoading} disabled={isLoading}>Войти</Button>
 					</Field>
 				</FieldGroup>
 			</form>
