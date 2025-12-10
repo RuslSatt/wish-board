@@ -3,7 +3,6 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button';
 	import { Label } from '$lib/components/ui/label';
-	import Loader2Icon from '@lucide/svelte/icons/loader-2';
 	import { toast } from 'svelte-sonner';
 	import { enhance } from '$app/forms';
 	import type { User } from '@supabase/supabase-js';
@@ -15,8 +14,7 @@
 	};
 
 	type EditProfileFormState = {
-		firstName: string;
-		username: string;
+		name: string;
 		birthdate: string;
 	};
 
@@ -25,8 +23,7 @@
 	const metadata = user?.user_metadata;
 
 	let formState: EditProfileFormState = $state({
-		firstName: metadata?.first_name ?? '',
-		username: metadata?.username ?? '',
+		name: metadata?.name ?? '',
 		birthdate: metadata?.birthdate ?? ''
 	});
 
@@ -68,19 +65,8 @@
 						id="firstName"
 						name="firstName"
 						placeholder="Иван"
-						bind:value={formState.firstName}
+						bind:value={formState.name}
 						class="h-12"
-					/>
-				</Field>
-
-				<Field>
-					<Label for="username">Имя пользователя</Label>
-					<Input
-						id="username"
-						name="username"
-						placeholder="ivan.ivanov"
-						class="h-12"
-						bind:value={formState.username}
 					/>
 				</Field>
 
