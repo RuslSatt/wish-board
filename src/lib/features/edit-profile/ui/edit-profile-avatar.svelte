@@ -29,6 +29,8 @@
 
 		if (!file) return;
 
+		isSubmitting = true;
+
 		avatarPreview = URL.createObjectURL(file);
 
 		const unique = crypto.randomUUID();
@@ -60,6 +62,8 @@
 
 			await invalidate('supabase:auth');
 
+			isSubmitting = false;
+
 			toast.success('Аватар успешно обновлен');
 		}
 	};
@@ -73,7 +77,7 @@
 	<div class="flex items-center flex-col gap-4 p-2">
 		<Avatar.Root class="size-28 rounded-full border border-border overflow-hidden">
 			{#if avatarPreview}
-				<Avatar.Image src={avatarPreview} alt="Фото профиля" />
+				<Avatar.Image src={avatarPreview} alt="Фото профиля" class="object-cover" />
 			{:else}
 				<Avatar.Fallback>U</Avatar.Fallback>
 			{/if}
@@ -81,18 +85,24 @@
 
 		<div class="flex flex-col gap-2 flex-1">
 			<div class="flex gap-2">
-				<label class="inline-flex">
-					<input
-						type="file"
-						accept="image/*"
-						class="hidden"
-						bind:this={fileInput}
-						onchange={handleAvatarChange}
-					/>
-					<Button type="button" variant="outline" size="sm" onclick={openFileDialog}>
-						Выбрать фото
-					</Button>
-				</label>
+				<input
+					type="file"
+					accept="image/*"
+					class="hidden"
+					bind:this={fileInput}
+					onchange={handleAvatarChange}
+					disabled={isSubmitting}
+				/>
+				<Button
+					type="button"
+					variant="outline"
+					size="sm"
+					onclick={openFileDialog}
+					disabled={isSubmitting}
+					loading={isSubmitting}
+				>
+					Выбрать фото
+				</Button>
 			</div>
 		</div>
 	</div>

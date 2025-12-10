@@ -97,11 +97,8 @@
 			</FieldGroup>
 
 			<div class="flex gap-3 pt-2">
-				<Button type="submit" class="flex-1" disabled={isSubmitting}>
+				<Button type="submit" class="flex-1" disabled={isSubmitting} loading={isSubmitting}>
 					Сохранить изменения
-					{#if isSubmitting}
-						<Loader2Icon class="animate-spin" />
-					{/if}
 				</Button>
 			</div>
 		</form>
