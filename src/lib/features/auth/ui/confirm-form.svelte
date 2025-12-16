@@ -58,7 +58,7 @@
 						{/if}
 					</Field>
 					<Field>
-						<Button loading={isLoading} disabled={isLoading}>Подтвердить</Button>
+						<Button type="submit" loading={isLoading} disabled={isLoading}>Подтвердить</Button>
 					</Field>
 				</FieldGroup>
 			</form>
