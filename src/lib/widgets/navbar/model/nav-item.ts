@@ -15,7 +15,7 @@ export type NavItem = {
 export const navItems: NavItem[] = [
 	{
 		icon: HomeIcon,
-		href: '/home'
+		href: '/'
 	},
 	{
 		icon: UsersIcon,

@@ -6,8 +6,8 @@
 	import { ProfileInfo } from '$lib/widgets/profile';
 	import { ProfileBoards } from '$lib/widgets/profile';
 	import { onMount } from 'svelte';
-	import type { PageData } from './$types';
-	import type { Database } from '../../database.types';
+	import type { PageData } from '../$types';
+	import type { Database } from '../../../database.types';
 
 	let { data }: { data: PageData } = $props();
 
