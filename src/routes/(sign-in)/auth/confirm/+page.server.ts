@@ -19,7 +19,7 @@ export const actions: Actions = {
 			return fail(400, { error: 'Email not found. Please try logging in again.', missing: true });
 		}
 
-		const { error } = await locals.supabase.auth.verifyOtp({
+		const { data, error } = await locals.supabase.auth.verifyOtp({
 			email: email,
 			token: code,
 			type: 'email'
@@ -32,6 +32,32 @@ export const actions: Actions = {
 		cookies.delete(PENDING_EMAIL_COOKIE, { path: '/' });
 		cookies.delete(PENDING_VERIFICATION_COOKIE, { path: '/' });
 
-		redirect(302, '/');
+		const userId = data?.user?.id;
+
+		const { data: profile, error: profileError } = await locals.supabase
+			.from('profiles')
+			.select()
+			.eq('user_id', userId ?? '')
+			.single();
+
+		if (!profile || profileError) {
+			const newProfileData = {
+				id: crypto.randomUUID(),
+				display_name: '',
+				avatar_url: null,
+				public_id: crypto.randomUUID(),
+				user_id: userId ?? ''
+			};
+
+			const { error: insertError } = await locals.supabase.from('profiles').insert(newProfileData);
+
+			if (insertError) {
+				return fail(500, { error: 'Failed to create profile. Please try again.', incorrect: true });
+			}
+
+			redirect(302, '/onboarding');
+		} else {
+			redirect(302, '/');
+		}
 	}
 };
